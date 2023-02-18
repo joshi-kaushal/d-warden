@@ -53,7 +53,7 @@ export default function DataType({ data, updateFields }: DataTypeProps) {
         What do you want to secure?
       </h2>
 
-      <div className="grid-col-1 mb-1 grid gap-4 md:grid-cols-2">
+      <div className="grid-col-1 my-0 mx-auto mb-1 grid gap-4 md:grid-cols-2">
         {BUTTONS.map((button) => {
           return (
             <button

@@ -50,21 +50,24 @@ export function FormWrapper() {
     <>
       <form onSubmit={onSubmit}>
         {step}
-        {!isFirstStep && (
+
+        <div>
+          {!isFirstStep && (
+            <button
+              type="button"
+              onClick={back}
+              className="mr-2 mt-4 rounded-xl border border-purple-400 px-4 py-1 font-semibold text-purple-600 transition-all duration-300 hover:bg-purple-400 hover:text-white"
+            >
+              Back
+            </button>
+          )}
           <button
-            type="button"
-            onClick={back}
-            className="mr-2 mt-4 rounded-xl border border-purple-400 px-4 py-1 font-semibold text-purple-600 transition-all duration-300 hover:bg-purple-400 hover:text-white"
+            type="submit"
+            className="mr-2 mt-4 rounded-xl border border-purple-600 bg-purple-600 px-4 py-1 font-semibold text-white transition-all  duration-300 hover:bg-white hover:text-purple-600"
           >
-            Back
+            {isLastStep ? "Finish" : "Next"}
           </button>
-        )}
-        <button
-          type="submit"
-          className="mr-2 mt-4 rounded-xl border border-purple-600 bg-purple-600 px-4 py-1 font-semibold text-white transition-all  duration-300 hover:bg-white hover:text-purple-600"
-        >
-          {isLastStep ? "Finish" : "Next"}
-        </button>
+        </div>
       </form>
     </>
   );
