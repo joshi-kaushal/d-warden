@@ -1,10 +1,16 @@
 import { FaFileUpload } from "react-icons/fa";
+
+type DataSecretProps = {
+  data: any;
+  updateFields: (data: any) => void;
+};
+
 const RenderDocumentInput = () => {
   return (
     <>
       <label
         htmlFor="fileInput"
-        className="flex h-[324px] w-60 cursor-pointer flex-col items-center justify-center rounded-xl border border-dashed border-gray-300 bg-[#FDFDFD] text-center hover:shadow-xl sm:h-[248px] sm:px-3 md:w-96"
+        className="my-0 mx-auto flex h-[324px] w-full cursor-pointer flex-col items-center justify-center rounded-xl border border-dashed border-gray-300 bg-[#FDFDFD] text-center hover:shadow-xl sm:h-[248px] sm:px-3 md:w-96"
         role="presentation"
         tabIndex={0}
       >
@@ -27,7 +33,7 @@ const RenderDocumentInput = () => {
   );
 };
 
-const RenderCredentials = () => {
+const RenderCredentialsInput = () => {
   return (
     <>
       <div className="relative mt-5">
@@ -154,13 +160,57 @@ const RenderCardInput = () => {
   );
 };
 
-export default function DataSecret() {
+const RenderPrivateInfoInput = () => {
   return (
     <>
-      <h2 className="font-serif text-2xl text-white">Enter your data</h2>
-      {/* <RenderCredentials />
-      <RenderDocumentInput /> */}
+      <div className="relative mt-5">
+        <textarea
+          name="privateInfo"
+          id="privateInfo"
+          placeholder="Private Information"
+          className="peer w-96 rounded-md border border-gray-300 px-3 py-3 shadow shadow-gray-100 placeholder:text-transparent focus:border-gray-500 focus:outline-none"
+          autoComplete="off"
+          rows={8}
+        />
+        <label
+          htmlFor="privateInfo"
+          className="pointer-events-none absolute top-0 left-0 ml-3 origin-left -translate-y-1/2 transform px-1 text-sm text-gray-500 transition-all duration-100 ease-in-out peer-placeholder-shown:top-1/2 peer-placeholder-shown:ml-4 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:-top-0 peer-focus:ml-3 peer-focus:text-sm peer-focus:text-gray-800"
+        >
+          Private Information
+        </label>
+      </div>
+    </>
+  );
+};
+
+const RenderOnScreen = (type: string) => {
+  switch (type) {
+    case "document":
+      return <RenderDocumentInput />;
+    case "credentials":
+      return <RenderCredentialsInput />;
+    case "card":
+      return <RenderCardInput />;
+    case "privateInfo":
+      return <RenderPrivateInfoInput />;
+    default:
+      return;
+  }
+};
+
+export default function DataSecret({ data, updateFields }: DataSecretProps) {
+  // dataType, data, updateFn
+  return (
+    <>
+      <h2 className="my-2 font-serif text-2xl font-semibold text-purple-600">
+        Enter your data
+      </h2>
+
+      {/* <RenderCredentialsInput />
+      <RenderDocumentInput /> 
       <RenderCardInput />
+      <RenderPrivateInfoInput /> */}
+      {RenderOnScreen(data.dataType)}
     </>
   );
 }

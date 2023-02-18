@@ -2,6 +2,7 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import Modal from "../components/modal";
+import { FormWrapper } from "../components/new/wrapper";
 
 const Home: NextPage = () => {
   return (
@@ -21,7 +22,7 @@ const Home: NextPage = () => {
           securely.
         </p>
         <Modal btnText="Add New">
-          <h1>Hello</h1>
+          <FormWrapper />
         </Modal>
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
