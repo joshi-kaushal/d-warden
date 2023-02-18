@@ -1,6 +1,7 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
+import Modal from "../components/modal";
 
 const Home: NextPage = () => {
   return (
@@ -19,9 +20,10 @@ const Home: NextPage = () => {
           The decentralized solution for saving your private, sensitive data
           securely.
         </p>
-        <button className="rounded-full border border-[hsl(280,100%,70%)] px-4 py-3 font-serif text-xl font-bold tracking-wider text-white outline-none transition-all duration-300 hover:bg-[hsl(280,100%,70%)] hover:px-6 hover:tracking-widest">
-          Add New
-        </button>
+        <Modal btnText="Add New">
+          <h1>Hello</h1>
+        </Modal>
+
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
           {links.map((link) => {
             return (
