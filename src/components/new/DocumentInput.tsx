@@ -1,9 +1,7 @@
 import { FaFileUpload } from "react-icons/fa";
+import { DataInputProps } from "../../types";
 
-type InputProps = {
-  updateFields: (data: any) => void;
-};
-const DocumentInput = ({ updateFields }: InputProps) => {
+const DocumentInput = ({ updateFields }: DataInputProps) => {
   return (
     <>
       <label

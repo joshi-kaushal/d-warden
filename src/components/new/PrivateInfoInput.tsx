@@ -1,8 +1,6 @@
-type InputProps = {
-  updateFields: (data: any) => void;
-};
+import { DataInputProps } from "../../types";
 
-const PrivateInfoInput = ({ updateFields }: InputProps) => {
+const PrivateInfoInput = ({ updateFields }: DataInputProps) => {
   return (
     <>
       <div className="relative mt-5">

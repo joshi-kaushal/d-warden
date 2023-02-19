@@ -3,23 +3,6 @@ import { useMultiStepForm } from "../../hooks/useMultistepForm";
 import DataSecret from "./dataSecret";
 import DataType from "./dataType";
 
-type FormWrapperProps = {
-  title: string;
-  children: ReactNode;
-};
-
-enum dataTypes {
-  document = "document",
-  credentials = "credentials",
-  card = "card",
-  privateInfo = "privateInfo",
-}
-
-type Data = {
-  dataType: dataTypes;
-  data: {};
-};
-
 const INITIAL_DATA = {
   dataType: "document",
   data: {},

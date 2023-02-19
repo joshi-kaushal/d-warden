@@ -3,17 +3,13 @@ import CredentialsInput from "./CredentialsInput";
 import DocumentInput from "./DocumentInput";
 import PrivateInfoInput from "./PrivateInfoInput";
 
-type DataSecretProps = {
-  data: any;
-  updateFields: (data: any) => void;
-};
+import { RenderOnScreenProps, DataSecretProps } from "../../types";
+import { ReactElement } from "react";
 
-type RenderOnScreenProps = {
-  type: string;
-  updateFields: (data: any) => void;
-};
-
-function RenderInput({ type, updateFields }: RenderOnScreenProps) {
+function RenderInput({
+  type,
+  updateFields,
+}: RenderOnScreenProps): ReactElement {
   switch (type) {
     case "document":
       return <DocumentInput updateFields={updateFields} />;
@@ -24,7 +20,7 @@ function RenderInput({ type, updateFields }: RenderOnScreenProps) {
     case "privateInfo":
       return <PrivateInfoInput updateFields={updateFields} />;
     default:
-      return;
+      return <DocumentInput updateFields={updateFields} />;
   }
 }
 

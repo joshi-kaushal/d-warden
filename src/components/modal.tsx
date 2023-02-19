@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { MdCloseFullscreen } from "react-icons/md";
+import { TModal } from "../types";
 
 // TODO: Check if browser is Safari on ioS < 15.4
 export default function Modal({ btnText, children }: TModal) {
@@ -47,10 +48,3 @@ export default function Modal({ btnText, children }: TModal) {
     </>
   );
 }
-
-type TModal = {
-  btnText: string;
-  children: React.ReactNode;
-  modalOpen?: boolean;
-  setModalOpen?: React.Dispatch<React.SetStateAction<boolean>>;
-};
