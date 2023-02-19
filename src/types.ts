@@ -38,3 +38,16 @@ export type DataTypeButtons = {
   text: string;
   icon: ReactElement;
 }[];
+
+export type CardDetails = {
+  owner: string;
+  number: number;
+  date: Date;
+  cvv: number;
+};
+
+export type CredentialDetails = {
+  website: string;
+  username: string;
+  password: string;
+};

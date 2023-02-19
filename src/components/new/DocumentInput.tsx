@@ -1,7 +1,13 @@
+import { useEffect, useState } from "react";
 import { FaFileUpload } from "react-icons/fa";
 import { DataInputProps } from "../../types";
 
 const DocumentInput = ({ updateFields }: DataInputProps) => {
+  const [files, setFiles] = useState<FileList | null>(null);
+
+  useEffect(() => {
+    updateFields({ data: files });
+  }, [files]);
   return (
     <>
       <label
@@ -17,6 +23,7 @@ const DocumentInput = ({ updateFields }: DataInputProps) => {
           type="file"
           tabIndex={-1}
           className="hidden"
+          onChange={(e) => setFiles(e.target.files)}
         />
         <div className="mb-[18px] flex justify-center">
           <FaFileUpload className="h-8 w-8 text-purple-600" />
@@ -24,6 +31,12 @@ const DocumentInput = ({ updateFields }: DataInputProps) => {
         <h3 className="mb-2 text-lg font-semibold text-purple-600 sm:text-xl md:text-2xl">
           Browse files or Drag and Drop
         </h3>
+        {files && (
+          <p>
+            {files.length} {files.length === 1 ? "document" : "documents"}{" "}
+            uploaded.
+          </p>
+        )}
       </label>
     </>
   );

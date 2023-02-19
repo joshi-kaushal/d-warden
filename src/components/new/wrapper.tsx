@@ -11,22 +11,25 @@ const INITIAL_DATA = {
 export function FormWrapper() {
   const [data, setData] = useState(INITIAL_DATA);
 
+  // updates the `data` state with the new data
   function updateFields(fields: Partial<FormData>) {
     setData((prev) => {
       return { ...prev, ...fields };
     });
   }
 
-  const { steps, currentStepIndex, step, isFirstStep, isLastStep, back, next } =
-    useMultiStepForm([
-      <DataType data={data} updateFields={updateFields} />,
-      <DataSecret data={data} updateFields={updateFields} />,
-    ]);
+  // The custom hook that manages the multi-step form
+  const { step, isFirstStep, isLastStep, back, next } = useMultiStepForm([
+    <DataType data={data} updateFields={updateFields} />,
+    <DataSecret data={data} updateFields={updateFields} />,
+  ]);
 
+  // When the user enters submit
   function onSubmit(e: FormEvent) {
     e.preventDefault();
     if (!isLastStep) return next();
-    alert("Successful Account Creation");
+    console.log(data);
+    // TODO: Add logic to send data to the blockchain
   }
 
   return (

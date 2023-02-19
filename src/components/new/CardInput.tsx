@@ -1,6 +1,27 @@
-import { DataInputProps } from "../../types";
+import { useState, useEffect } from "react";
+import { CardDetails, DataInputProps } from "../../types";
+import isValidCardNumber from "../../utils/validateCreditCardNumber";
 
 const CardInput = ({ updateFields }: DataInputProps) => {
+  const [cardDetails, setCardDetails] = useState<CardDetails>(
+    {} as CardDetails
+  );
+
+  useEffect(() => {
+    // Checks if the credit/debit card is valid
+    if (!isValidCardNumber) {
+      alert("Invalid Card Number");
+    }
+
+    // Checks if the CVV is valid
+    if (cardDetails.cvv < 100 || cardDetails.cvv > 999) {
+      alert("Invalid CVV");
+      return;
+    }
+
+    updateFields({ data: cardDetails });
+  }, [cardDetails]);
+
   return (
     <>
       <div className="relative mt-5">
@@ -11,7 +32,9 @@ const CardInput = ({ updateFields }: DataInputProps) => {
           placeholder="Owner Name"
           className="peer w-96 rounded-md border border-gray-300 px-3 py-3 shadow shadow-gray-100 placeholder:text-transparent focus:border-gray-500 focus:outline-none"
           autoComplete="off"
-          onChange={(e) => updateFields({ data: e.target.value })}
+          onChange={(e) =>
+            setCardDetails({ ...cardDetails, owner: e.target.value })
+          }
         />
         <label
           htmlFor="owner"
@@ -23,12 +46,15 @@ const CardInput = ({ updateFields }: DataInputProps) => {
       <div className="relative mt-5">
         <input
           type="text"
-          pattern="^[0-9]*$"
+          pattern="[0-9]+"
           name="cardNo"
           id="cardNo"
           placeholder="Card Number"
           className="peer w-96 rounded-md border border-gray-300 px-3 py-3 shadow shadow-gray-100 placeholder:text-transparent focus:border-gray-500 focus:outline-none"
           autoComplete="off"
+          onChange={(e) =>
+            setCardDetails({ ...cardDetails, number: e.target.valueAsNumber })
+          }
         />
         <label
           htmlFor="cardNo"
@@ -45,6 +71,9 @@ const CardInput = ({ updateFields }: DataInputProps) => {
           placeholder="Expiry Date"
           className="peer w-[190px] rounded-md border border-gray-300 px-3 py-3 shadow shadow-gray-100 placeholder:text-transparent focus:border-gray-500 focus:outline-none"
           autoComplete="off"
+          onChange={(e) =>
+            setCardDetails({ ...cardDetails, expiry: e.target.valueAsDate })
+          }
         />
         <label
           htmlFor="expiry"
@@ -61,6 +90,9 @@ const CardInput = ({ updateFields }: DataInputProps) => {
           placeholder="CVV"
           className="peer w-[190px] rounded-md border border-gray-300 px-3 py-3 shadow shadow-gray-100 placeholder:text-transparent focus:border-gray-500 focus:outline-none"
           autoComplete="off"
+          onChange={(e) => {
+            setCardDetails({ ...cardDetails, cvv: e.target.valueAsNumber });
+          }}
         />
         <label
           htmlFor="cvv"
