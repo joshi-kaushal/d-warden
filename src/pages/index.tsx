@@ -37,14 +37,25 @@ const Home: NextPage = () => {
           -Warden
         </motion.h1>
 
-        <p className="text-center text-xl font-medium text-white">
+        <motion.p
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ ease: "easeIn", duration: 0.5 }}
+          className="text-center text-xl font-medium text-white"
+        >
           The decentralized solution for saving your private, sensitive data
           securely.
-        </p>
+        </motion.p>
 
-        <Modal btnText="Add New">
-          <FormWrapper />
-        </Modal>
+        <motion.div
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ ease: "easeIn", duration: 0.75 }}
+        >
+          <Modal btnText="Add New">
+            <FormWrapper />
+          </Modal>
+        </motion.div>
 
         <motion.div
           variants={container}
@@ -52,20 +63,24 @@ const Home: NextPage = () => {
         >
           {links.map((link) => {
             return (
-              <Link
-                className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
-                href={link.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                key={link.id}
+              <motion.div
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ ease: "easeIn", duration: 1 }}
               >
-                <motion.h3 variants={item} className="text-2xl font-bold">
-                  {link.title} →
-                </motion.h3>
-                <motion.div variants={item} className="text-base">
-                  {link.description}
-                </motion.div>
-              </Link>
+                <Link
+                  className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 text-white hover:bg-white/20"
+                  href={link.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  key={link.id}
+                >
+                  <motion.h3 variants={item} className="text-2xl font-bold">
+                    {link.title} →
+                  </motion.h3>
+                  <div className="text-base">{link.description}</div>
+                </Link>
+              </motion.div>
             );
           })}
         </motion.div>
@@ -96,20 +111,5 @@ const item = {
   visible: {
     y: 0,
     opacity: 1,
-  },
-};
-
-// Decentralized Hover
-const hoverVariant = {
-  initial: {
-    scale: 0,
-    opacity: 0.1,
-  },
-  animate: {
-    scale: 1,
-    opacity: 1,
-  },
-  transition: {
-    ease: "easeIn",
   },
 };
