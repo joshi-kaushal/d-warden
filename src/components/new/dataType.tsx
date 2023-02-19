@@ -1,5 +1,31 @@
-import { DataTypeProps } from "../../types";
-import { BUTTONS } from "../../data";
+import { BsFillCreditCard2BackFill } from "react-icons/bs";
+import { IoIosDocument } from "react-icons/io";
+import { FaKey } from "react-icons/fa";
+import { MdOutlinePassword } from "react-icons/md";
+import { DataTypeProps, DataTypeButtons } from "../../types";
+
+export const BUTTONS: DataTypeButtons = [
+  {
+    id: "document",
+    text: "Document",
+    icon: <IoIosDocument className="h-8 w-8" />,
+  },
+  {
+    id: "credentials",
+    text: "Log-in Credentials",
+    icon: <MdOutlinePassword className="h-8 w-8" />,
+  },
+  {
+    id: "card",
+    text: "Debit/ Credit Card Details",
+    icon: <BsFillCreditCard2BackFill className="h-8 w-8" />,
+  },
+  {
+    id: "privateInfo",
+    text: "Private Information",
+    icon: <FaKey className="h-8 w-8" />,
+  },
+];
 
 export default function DataType({ data, updateFields }: DataTypeProps) {
   // dataType && updateFn
