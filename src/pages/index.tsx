@@ -1,10 +1,14 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
+import { useState } from "react";
+
 import Modal from "../components/modal";
 import { FormWrapper } from "../components/new/wrapper";
 
 const Home: NextPage = () => {
+  const [isTitleHovered, setIsTitleHovered] = useState(false);
+
   return (
     <>
       <Head>
@@ -13,14 +17,29 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
-        <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
-          <span className="text-[hsl(280,100%,70%)]">D</span>-Warden
+        <h1
+          onMouseEnter={() => setIsTitleHovered(true)}
+          onMouseLeave={() => setIsTitleHovered(false)}
+          className={`${
+            isTitleHovered ? "text-3xl" : "text-5xl "
+          } text-center font-extrabold tracking-tight text-white transition-all duration-500 sm:text-[5rem]`}
+        >
+          <span className="text-[hsl(280,100%,70%)]">
+            D
+            {isTitleHovered && (
+              <span className=" transition-all duration-200 ease-in-out">
+                entralized
+              </span>
+            )}
+          </span>
+          -Warden
         </h1>
 
         <p className="text-center text-xl font-medium text-white">
           The decentralized solution for saving your private, sensitive data
           securely.
         </p>
+
         <Modal btnText="Add New">
           <FormWrapper />
         </Modal>
