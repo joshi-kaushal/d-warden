@@ -2,7 +2,7 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { useState } from "react";
-
+import { motion } from "framer-motion";
 import Modal from "../components/modal";
 import { FormWrapper } from "../components/new/wrapper";
 import { HOMEPAGE_LINKS as links } from "../data";
@@ -18,14 +18,15 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
-        <h1
+        <motion.h1
           onMouseEnter={() => setIsTitleHovered(true)}
           onMouseLeave={() => setIsTitleHovered(false)}
-          className={`${
-            isTitleHovered ? "text-3xl" : "text-5xl "
-          } text-center font-extrabold tracking-tight text-white transition-all duration-500 sm:text-[5rem]`}
+          initial={{ scale: 0, opacity: 0.1 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ ease: "easeIn" }}
+          className={` gradient-underline text-center font-extrabold tracking-tight text-white transition-all duration-500 sm:text-[5rem]`}
         >
-          <span className="text-[hsl(280,100%,70%)]">
+          <span className="gradient-text">
             D
             {isTitleHovered && (
               <span className=" transition-all duration-200 ease-in-out">
@@ -34,7 +35,7 @@ const Home: NextPage = () => {
             )}
           </span>
           -Warden
-        </h1>
+        </motion.h1>
 
         <p className="text-center text-xl font-medium text-white">
           The decentralized solution for saving your private, sensitive data
@@ -45,7 +46,10 @@ const Home: NextPage = () => {
           <FormWrapper />
         </Modal>
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
+        <motion.div
+          variants={container}
+          className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8"
+        >
           {links.map((link) => {
             return (
               <Link
@@ -55,15 +59,57 @@ const Home: NextPage = () => {
                 rel="noopener noreferrer"
                 key={link.id}
               >
-                <h3 className="text-2xl font-bold">{link.title} →</h3>
-                <div className="text-base">{link.description}</div>
+                <motion.h3 variants={item} className="text-2xl font-bold">
+                  {link.title} →
+                </motion.h3>
+                <motion.div variants={item} className="text-base">
+                  {link.description}
+                </motion.div>
               </Link>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </>
   );
 };
 
 export default Home;
+
+// framer motion
+
+// Links
+const container = {
+  hidden: { opacity: 1, scale: 0 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      delayChildren: 0.3,
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const item = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+  },
+};
+
+// Decentralized Hover
+const hoverVariant = {
+  initial: {
+    scale: 0,
+    opacity: 0.1,
+  },
+  animate: {
+    scale: 1,
+    opacity: 1,
+  },
+  transition: {
+    ease: "easeIn",
+  },
+};

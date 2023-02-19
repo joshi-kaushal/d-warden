@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
 import { MdCloseFullscreen } from "react-icons/md";
 import { TModal } from "../types";
 
@@ -23,12 +24,14 @@ export default function Modal({ btnText, children }: TModal) {
   // ! If you add a form, remember to add method="dialog" in the form element
   return (
     <>
-      <button
-        className="rounded-full border border-[hsl(280,100%,70%)] px-4 py-3 font-serif text-xl font-bold tracking-wider text-white outline-none transition-all duration-300 hover:bg-[hsl(280,100%,70%)] hover:px-6 hover:tracking-widest"
+      <motion.button
+        whileHover={{ scale: 1.2 }}
+        whileTap={{ scale: 0.9 }}
+        className="gradient-background rounded-full border border-none px-4 py-3 font-serif text-xl font-bold tracking-wider text-[#2e026d] outline-none transition-all duration-300 "
         onClick={() => setIsOpen(true)}
       >
         {btnText}
-      </button>
+      </motion.button>
       {/* md:w-8/12 lg:w-5/12   w-10/12*/}
       {isOpen && (
         <dialog
